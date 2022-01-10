@@ -7,8 +7,8 @@
 const bool ENABLE_SERIAL = true;
 const bool ENABLE_I2C = true;
 const bool ENABLE_DISPLAY = true;  // default: false
-static const int SDA_PIN = 26;
-static const int SCL_PIN = 32;
+const int SDA_PIN = 26;
+const int SCL_PIN = 32;
 #else
 #error "You have to define correct target."
 #endif
