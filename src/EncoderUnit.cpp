@@ -15,13 +15,13 @@ bool EncoderUnit::begin(int sdaPin, int sclPin, uint32_t frequency) {
 
 bool EncoderUnit::isPressed(void) const {
     uint8_t result = 0xFF;
-    readBytes(this->_addr, BUTTON, &result, sizeof(result));
+    readBytes(getAddress(), BUTTON, &result, sizeof(result));
     return result == 0;
 }
 
 short EncoderUnit::getValue(void) const {
     uint8_t data[2] = {0};
-    readBytes(this->_addr, ENCODER, data, sizeof(data));
+    readBytes(getAddress(), ENCODER, data, sizeof(data));
     return static_cast<short>(data[0] | (data[1] << 8));
 }
 
@@ -30,7 +30,11 @@ void EncoderUnit::setLED(LEDPosition pos, uint32_t color) {
                             static_cast<uint8_t>((color >> 16) & 0xFF),
                             static_cast<uint8_t>((color >> 8) & 0xFF),
                             static_cast<uint8_t>(color & 0xFF)};
-    writeBytes(this->_addr, RGB_LED, data, sizeof(data));
+    writeBytes(getAddress(), RGB_LED, data, sizeof(data));
+}
+
+uint8_t EncoderUnit::getAddress(void) const {
+    return this->_addr;
 }
 
 bool EncoderUnit::readBytes(uint8_t addr, uint8_t reg, uint8_t* buf,

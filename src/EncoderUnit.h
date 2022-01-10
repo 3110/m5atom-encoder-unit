@@ -25,6 +25,7 @@ public:
     virtual short getValue(void) const;
 
 protected:
+    virtual uint8_t getAddress(void) const;
     virtual bool readBytes(uint8_t addr, uint8_t reg, uint8_t* buf,
                            size_t len) const;
     virtual bool writeBytes(uint8_t addr, uint8_t reg, const uint8_t* buf,
