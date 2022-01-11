@@ -6,7 +6,7 @@
 #ifdef TARGET_M5ATOM
 #define M5_BEGIN M5.begin(ENABLE_SERIAL, ENABLE_I2C, ENABLE_DISPLAY)
 const bool ENABLE_SERIAL = true;
-const bool ENABLE_I2C = true;
+const bool ENABLE_I2C = false;     // default: true
 const bool ENABLE_DISPLAY = true;  // default: false
 const int SDA_PIN = 26;
 const int SCL_PIN = 32;
@@ -21,7 +21,8 @@ PaHub hub;
 
 void setup(void) {
     M5_BEGIN;
-    if (!encoder.begin(SDA_PIN, SCL_PIN)) {
+    Wire.begin(SDA_PIN, SCL_PIN);
+    if (!encoder.begin()) {
         SERIAL_PRINTLN("Failed to initialize encoder unit.");
         while (true) {
         }

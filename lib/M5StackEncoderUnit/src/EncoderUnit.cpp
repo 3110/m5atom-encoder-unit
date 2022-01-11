@@ -9,8 +9,8 @@ EncoderUnit::EncoderUnit(TwoWire& wire, uint8_t addr)
 EncoderUnit::~EncoderUnit(void) {
 }
 
-bool EncoderUnit::begin(int sdaPin, int sclPin, uint32_t frequency) {
-    return this->_wire.begin(sdaPin, sclPin, frequency);
+bool EncoderUnit::begin(void) {
+    return true;
 }
 
 bool EncoderUnit::isPressed(void) const {
