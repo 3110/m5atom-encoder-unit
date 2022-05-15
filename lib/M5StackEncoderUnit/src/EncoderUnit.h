@@ -10,7 +10,12 @@ class EncoderUnit {
 public:
     static const uint8_t I2C_ADDRESS = 0x40;
     static const uint32_t FREQUENCY = 200000L;
-    enum Register { ENCODER = 0x10, BUTTON = 0x20, RGB_LED = 0x30 };
+    enum Register {
+        ENCODER = 0x10,
+        BUTTON = 0x20,
+        RGB_LED = 0x30,
+        RESET = 0x40
+    };
     enum LEDPosition { BOTH = 0, LEFT = 1, RIGHT = 2 };
 
     EncoderUnit(TwoWire& wire = Wire, uint8_t addr = I2C_ADDRESS);
@@ -20,6 +25,7 @@ public:
     virtual bool isPressed(void) const;
     virtual void setLED(LEDPosition pos, uint32_t color);
     virtual short getValue(void) const;
+    virtual void reset(uint8_t counter = 1);
 
 protected:
     virtual uint8_t getAddress(void) const;

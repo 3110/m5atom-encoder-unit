@@ -32,6 +32,7 @@ short prev = 0;
 void loop(void) {
     M5.update();
     const short cur = encoder.getValue();
+    SERIAL_PRINTF_LN("Value: %d", cur);
     if (prev != cur) {
         SERIAL_PRINTLN(cur);
         if (prev > cur) {
@@ -45,6 +46,7 @@ void loop(void) {
     }
     if (encoder.isPressed()) {
         encoder.setLED(EncoderUnit::LEDPosition::BOTH, 0xC800FF);
+        encoder.reset();
     }
     delay(20);
 }

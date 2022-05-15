@@ -33,6 +33,10 @@ void EncoderUnit::setLED(LEDPosition pos, uint32_t color) {
     writeBytes(getAddress(), RGB_LED, data, sizeof(data));
 }
 
+void EncoderUnit::reset(uint8_t counter) {
+    writeBytes(getAddress(), RESET, &counter, sizeof(counter));
+}
+
 uint8_t EncoderUnit::getAddress(void) const {
     return this->_addr;
 }
