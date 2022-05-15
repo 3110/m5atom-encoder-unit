@@ -25,6 +25,7 @@ void setup(void) {
         while (true) {
         }
     }
+    encoder.setPulseMode();
 }
 
 short prev = 0;
@@ -47,6 +48,13 @@ void loop(void) {
     if (encoder.isPressed()) {
         encoder.setLED(EncoderUnit::LEDPosition::BOTH, 0xC800FF);
         encoder.reset();
+    }
+    if (M5.Btn.wasPressed()) {
+        if (encoder.isPulseMode()) {
+            encoder.setAbsoluteMode();
+        } else {
+            encoder.setPulseMode();
+        }
     }
     delay(20);
 }
