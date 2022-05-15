@@ -25,7 +25,7 @@ public:
     virtual bool isPressed(void) const;
     virtual void setLED(LEDPosition pos, uint32_t color);
     virtual short getValue(void) const;
-    virtual void reset(uint8_t counter = 1);
+    virtual void reset(void);
 
 protected:
     virtual uint8_t getAddress(void) const;

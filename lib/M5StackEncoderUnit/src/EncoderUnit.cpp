@@ -2,6 +2,8 @@
 
 namespace M5Stack {
 
+static const uint8_t RESET_REG_VALUE = 1;
+
 EncoderUnit::EncoderUnit(TwoWire& wire, uint8_t addr)
     : _wire(wire), _addr(addr) {
 }
@@ -33,8 +35,8 @@ void EncoderUnit::setLED(LEDPosition pos, uint32_t color) {
     writeBytes(getAddress(), RGB_LED, data, sizeof(data));
 }
 
-void EncoderUnit::reset(uint8_t counter) {
-    writeBytes(getAddress(), RESET, &counter, sizeof(counter));
+void EncoderUnit::reset(void) {
+    writeBytes(getAddress(), RESET, &RESET_REG_VALUE, sizeof(RESET_REG_VALUE));
 }
 
 uint8_t EncoderUnit::getAddress(void) const {
