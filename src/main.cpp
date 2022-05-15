@@ -26,7 +26,6 @@ void setup(void) {
         while (true) {
         }
     }
-    encoder.setPulseMode();
     prev = encoder.getValue();
     SERIAL_PRINTF_LN("Value: %d", prev);
 }

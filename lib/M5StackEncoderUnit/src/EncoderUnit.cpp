@@ -12,6 +12,7 @@ EncoderUnit::~EncoderUnit(void) {
 }
 
 bool EncoderUnit::begin(void) {
+    setMode(this->_mode);
     return true;
 }
 
