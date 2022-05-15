@@ -16,6 +16,7 @@ const int SCL_PIN = 32;
 using namespace M5Stack;
 
 EncoderUnit encoder;
+short prev = 0;
 
 void setup(void) {
     M5_BEGIN;
@@ -25,15 +26,16 @@ void setup(void) {
         while (true) {
         }
     }
+    encoder.setPulseMode();
+    prev = encoder.getValue();
+    SERIAL_PRINTF_LN("Value: %d", prev);
 }
-
-short prev = 0;
 
 void loop(void) {
     M5.update();
     const short cur = encoder.getValue();
     if (prev != cur) {
-        SERIAL_PRINTLN(cur);
+        SERIAL_PRINTF_LN("Value: %d", cur);
         if (prev > cur) {
             encoder.setLED(EncoderUnit::LEDPosition::LEFT, 0x000011);
         } else {
@@ -45,6 +47,14 @@ void loop(void) {
     }
     if (encoder.isPressed()) {
         encoder.setLED(EncoderUnit::LEDPosition::BOTH, 0xC800FF);
+        encoder.reset();
+    }
+    if (M5.Btn.wasPressed()) {
+        if (encoder.isPulseMode()) {
+            encoder.setAbsoluteMode();
+        } else {
+            encoder.setPulseMode();
+        }
     }
     delay(20);
 }
